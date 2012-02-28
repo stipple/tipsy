@@ -142,13 +142,12 @@
         }
         
         function enter() {
-            var tipsy;
+            var tipsy = get(this);
           
-            if (typeof options.enterCallback === 'function' && options.enterCallback() === false) {
+            if (typeof options.enterCallback === 'function' && options.enterCallback(this, tipsy) === false) {
                 return;
             }
             
-            tipsy = get(this);
             tipsy.hoverState = 'in';
             if (options.delayIn == 0) {
                 tipsy.show();
@@ -159,13 +158,12 @@
         }
         
         function leave() {
-            var tipsy;
+            var tipsy = get(this);
           
-            if (typeof options.leaveCallback === 'function' && options.leaveCallback() === false) {
+            if (typeof options.leaveCallback === 'function' && options.leaveCallback(this, tipsy) === false) {
                 return;
             }
           
-            tipsy = get(this);
             tipsy.hoverState = 'out';
             if (options.delayOut == 0) {
                 tipsy.hide();
