@@ -122,7 +122,6 @@
     };
     
     $.fn.tipsy = function(options) {
-        
         if (options === true) {
             return this.data('tipsy');
         } else if (typeof options == 'string') {
@@ -143,7 +142,13 @@
         }
         
         function enter() {
-            var tipsy = get(this);
+            var tipsy;
+          
+            if (typeof options.enterCallback === 'function' && options.enterCallback() === false) {
+                return;
+            }
+            
+            tipsy = get(this);
             tipsy.hoverState = 'in';
             if (options.delayIn == 0) {
                 tipsy.show();
@@ -154,7 +159,13 @@
         }
         
         function leave() {
-            var tipsy = get(this);
+            var tipsy;
+          
+            if (typeof options.leaveCallback === 'function' && options.leaveCallback() === false) {
+                return;
+            }
+          
+            tipsy = get(this);
             tipsy.hoverState = 'out';
             if (options.delayOut == 0) {
                 tipsy.hide();
